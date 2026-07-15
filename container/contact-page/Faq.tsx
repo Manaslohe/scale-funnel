@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { FaqItems, clientsItem } from "@/constants";
+import { FaqItems } from "@/constants";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Faq() {
-	const [activeAccordion, setActiveAccordion] = useState(clientsItem[0].id);
+	const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
 	const toggleAccordion = (itemId: any) => {
 		setActiveAccordion((prev) => (prev === itemId ? null : itemId));
 	};
@@ -20,8 +20,8 @@ export default function Faq() {
 					key={item.id}
 					className={`w-full flex py-[10px] flex-col ${
 						item.id == 1
-							? "border-y border-[#21212155]"
-							: "border-b border-[#21212155]"
+							? "border-y border-[#20202155]"
+							: "border-b border-[#20202155]"
 					}`}>
 					<div className="w-full flex items-center justify-between sm:gap-[15px] xm:gap-[15px] py-[10px] padding-x">
 						<div className="w-[50%] sm:w-full xm:w-full">
@@ -70,10 +70,7 @@ export default function Faq() {
 											{item.links.map((link) => (
 												<div
 													key={link.id}
-													className="flex pt-[20px] sm:flex-col xm:flex-col sm:gap-[20px] xm:gap-[20px] justify-between gap-[80px]">
-													<span className="paragraph tracking-wider font-normal font-NeueMontreal text-secondry">
-														{link.title}
-													</span>
+													className="pt-[20px]">
 													<p className="paragraph tracking-wider font-normal font-NeueMontreal text-secondry">
 														{link.description}
 													</p>

@@ -1,155 +1,145 @@
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+"use client";
+import { useState } from "react";
 
-const services = [
+const approachItems = [
 	{
 		id: 1,
-		name: "Paid Marketing",
-		tagline: "The right people. The right message. The right moment.",
-		description: "We run Meta ad campaigns engineered for one thing — getting your ideal coaching clientele into your funnel.",
-		includes: [
-			"Meta Ads (Facebook & Instagram) strategy and execution",
-			"Ad creative direction and copywriting",
-			"Audience research and targeting",
-			"Campaign setup, monitoring, and optimization",
-			"CAC, CPL, and ROAS tracking",
-			"A/B testing on creatives and copy",
-			"Weekly and monthly performance reports",
-		],
+		step: "01",
+		title: "Growth defines it all",
+		description:
+			"What's your bottleneck — leads, calls, or close rate? Understanding where your funnel breaks down lets us build the exact system that fixes it.",
 	},
 	{
 		id: 2,
-		name: "Landing Pages",
-		tagline: "Your page should do the selling before you say a word.",
-		description: "We design and write conversion-focused landing pages and sales pages that move visitors from curious to committed.",
-		includes: [
-			"Landing page copywriting and structure",
-			"Sales page optimization",
-			"Call booking funnel setup",
-			"Webinar and masterclass registration pages",
-			"Consultation funnel design",
-			"Testimonial and social proof strategy",
-			"Conversion tracking and fixes",
-		],
+		step: "02",
+		title: "Your niche is the hero",
+		description:
+			"Health, business, mindset, or relationship coaching — each niche sells differently. We build messaging and funnels around how your specific audience actually buys.",
 	},
 	{
 		id: 3,
-		name: "Automation",
-		tagline: "Your business should be working even when you're not.",
-		description: "We build the backend systems that keep leads warm, move them through your funnel, and free you from manual follow-up — permanently.",
-		includes: [
-			"Email sequence setup and copywriting",
-			"WhatsApp sequence and automation",
-			"CRM setup and management",
-			"Lead qualification workflows",
-			"Webinar show-up optimization sequences",
-			"Pipeline automation",
-			"Integration across your entire tech stack",
-		],
-	},
-	{
-		id: 4,
-		name: "Growth Systems",
-		tagline: "Strategy, data, and relentless optimization — so your growth compounds.",
-		description: "This is the engine behind everything. We don't just run campaigns and hope — we track, analyze, test, and refine every part of your funnel.",
-		includes: [
-			"KPI dashboard setup and tracking",
-			"Ad performance analysis",
-			"Funnel optimization",
-			"Conversion rate, CAC, and lead cost analysis",
-			"A/B testing across funnel stages",
-			"Competitor and market intelligence",
-			"Weekly and monthly strategy reporting",
-			"Offer positioning and pricing strategy",
-		],
+		step: "03",
+		title: "Systems make the difference",
+		description:
+			"Ads without a landing page. Leads without follow-up. We connect every piece — marketing, funnel, and automation — into one working system.",
 	},
 ];
 
+const sectionHeading =
+	"text-[28px] leading-[36px] lg:text-[26px] lg:leading-[34px] md:text-[24px] md:leading-[32px] sm:text-[20px] sm:leading-[28px] xm:text-[18px] xm:leading-[26px] font-bold font-NeueMontreal text-secondry";
+
 export default function Hero() {
+	const [activeId, setActiveId] = useState(approachItems[0].id);
+
 	return (
-		<section className="w-full min-h-screen">
+		<section className="w-full">
 			<div className="w-full flex flex-col justify-between">
 				<div className="w-full flex flex-col">
-					<div className="w-full margin padding-x">
-						<div>
-							<h1 className="heading tracking-[-1.3px] text-secondry font-semibold font-FoundersGrotesk uppercase">
-								What We Do —{" "}
-								<br className="sm:hidden xm:hidden" />
-								And How We Do It.
-							</h1>
-						</div>
+					<div className="w-full pt-[160px] pb-[60px] lg:pt-[140px] md:pt-[160px] sm:pt-[150px] xm:pt-[140px] padding-x">
+						<h1 className="text-[96px] leading-[102px] lg:text-[78px] lg:leading-[84px] md:text-[64px] md:leading-[70px] sm:text-[48px] sm:leading-[54px] xm:text-[40px] xm:leading-[46px] tracking-[0.005em] text-[#202021] font-semibold font-FoundersGrotesk uppercase">
+							services
+						</h1>
 					</div>
-					<div className="w-full border-t border-[#1B2B6B33]">
-						<p className="w-[80%] sm:w-full xm:w-full sub-heading font-normal padding-x font-NeueMontreal text-secondry padding-y">
-							Four core services.&nbsp;
-							<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-								One outcome&nbsp;
-							</span>
-							—&nbsp;
-							<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-								predictable, scalable&nbsp;
-							</span>
-							growth for your coaching business.
+
+					<div className="w-full border-t border-[#20202155] py-[20px] padding-x">
+						<p className={sectionHeading}>
+							What We Do — And How We Do It.
 						</p>
 					</div>
 
-					{/* Services Detail Blocks */}
-					<div className="w-full padding-x flex flex-col gap-0">
-						{services.map((service, index) => (
-							<div
-								key={service.id}
-								className={`w-full py-[60px] sm:py-[40px] xm:py-[40px] flex gap-[50px] sm:flex-col xm:flex-col ${
-									index === 0 ? "border-t border-[#1B2B6B33]" : ""
-								} border-b border-[#1B2B6B33]`}>
-								{/* Left: Number + Title */}
-								<div className="w-[30%] sm:w-full xm:w-full flex-shrink-0">
-									<span className="text-[11px] uppercase tracking-[3px] font-NeueMontreal font-semibold text-accent mb-[16px] block">
-										0{service.id}
-									</span>
-									<h2 className="text-[36px] sm:text-[28px] xm:text-[24px] font-FoundersGrotesk font-bold text-secondry leading-[1.1] mb-[16px]">
-										{service.name}
-									</h2>
-									<p className="paragraph font-NeueMontreal text-secondry opacity-60 italic">
-										{service.tagline}
-									</p>
-								</div>
-								{/* Right: Description + Includes */}
-								<div className="w-[70%] sm:w-full xm:w-full flex flex-col gap-[30px]">
-									<p className="paragraph font-NeueMontreal text-secondry">
-										{service.description}
-									</p>
-									<div>
-										<p className="small-text font-NeueMontreal font-semibold text-secondry uppercase tracking-[2px] mb-[16px]">
-											What&apos;s included:
-										</p>
-										<ul className="flex flex-col gap-[10px]">
-											{service.includes.map((item, i) => (
-												<li key={i} className="flex items-start gap-[12px]">
-													<span className="w-[6px] h-[6px] rounded-full bg-accent flex-shrink-0 mt-[8px]" />
-													<span className="paragraph font-NeueMontreal text-secondry opacity-80">
-														{item}
-													</span>
-												</li>
-											))}
-										</ul>
-									</div>
-									<div>
-										<Link
-											href="/contact"
-											className="flex items-center gap-[10px] group w-fit">
-											<div className="rounded-[50px] border border-[#1B2B6B99] group-hover:bg-secondry py-[6px] px-[16px] cursor-pointer transition-all duration-300">
-												<span className="paragraph font-NeueMontreal text-secondry uppercase group-hover:text-white transition-all duration-300">
-													Book a Strategy Call
+					<div className="w-full">
+						<p className="w-[80%] sm:w-full xm:w-full text-[20px] leading-[32px] lg:text-[19px] lg:leading-[30px] md:text-[18px] md:leading-[28px] font-normal padding-x font-NeueMontreal text-secondry py-[30px] lg:py-[28px] md:py-[24px] sm:py-[20px] xm:py-[20px] text-justify">
+							We build&nbsp;
+							<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
+								complete growth systems&nbsp;
+							</span>
+							for coaches, consultants and course creators — Meta
+							ads, landing pages,&nbsp;
+							<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
+								automation, and analytics.&nbsp;
+							</span>
+						</p>
+					</div>
+
+					<div className="w-full border-t border-[#20202155] py-[30px] padding-x">
+						<div className="w-full flex items-center justify-between gap-[40px] sm:flex-col xm:flex-col sm:items-start xm:items-start sm:gap-[24px] xm:gap-[24px]">
+							<div className="w-[35%] sm:w-full xm:w-full shrink-0">
+								<p className={sectionHeading}>
+									We do this by following a <br />
+									simple approach:
+								</p>
+							</div>
+
+							<div className="w-[65%] sm:w-full xm:w-full flex gap-[30px] sm:flex-col xm:flex-col">
+								<div className="flex flex-col border-l border-[#20202133] sm:border-l-0 sm:border-t sm:border-[#20202133]">
+									{approachItems.map((item) => {
+										const isActive = activeId === item.id;
+										return (
+											<button
+												key={item.id}
+												type="button"
+												onClick={() =>
+													setActiveId(item.id)
+												}
+												onMouseEnter={() =>
+													setActiveId(item.id)
+												}
+												className={`group relative text-left pl-[24px] pr-[16px] py-[18px] border-b border-[#20202133] transition-all duration-300 ${
+													isActive
+														? "bg-[#DA7B3108]"
+														: "hover:bg-[#20202105]"
+												}`}>
+												<span
+													className={`absolute left-0 top-0 h-full w-[3px] transition-all duration-300 ${
+														isActive
+															? "bg-orange"
+															: "bg-transparent group-hover:bg-[#20202133]"
+													}`}
+												/>
+												<span
+													className={`text-[12px] font-NeueMontreal tracking-[0.08em] transition-colors duration-300 ${
+														isActive
+															? "text-orange"
+															: "text-[#20202166]"
+													}`}>
+													{item.step}
 												</span>
-											</div>
-											<div className="w-[36px] h-[36px] border border-[#1B2B6B99] rounded-full flex items-center justify-center group-hover:bg-secondry transition-all duration-300 xm:hidden sm:hidden">
-												<ArrowUpRight size={18} strokeWidth={1.5} className="text-secondry group-hover:text-white" />
-											</div>
-										</Link>
-									</div>
+												<p
+													className={`paragraph font-NeueMontreal pt-[4px] transition-colors duration-300 ${
+														isActive
+															? "text-secondry font-medium"
+															: "text-[#20202199] group-hover:text-secondry"
+													}`}>
+													{item.title}
+												</p>
+											</button>
+										);
+									})}
+								</div>
+
+								<div className="flex-1 min-h-[180px] sm:min-h-0 relative overflow-hidden">
+									{approachItems.map((item) => (
+										<div
+											key={item.id}
+											className={`absolute inset-0 flex flex-col justify-center transition-all duration-300 ease-out ${
+												activeId === item.id
+													? "opacity-100 translate-y-0 pointer-events-auto"
+													: "opacity-0 translate-y-[12px] pointer-events-none"
+											}`}>
+											<span className="text-[48px] leading-none font-FoundersGrotesk font-bold text-[#20202115]">
+												{item.step}
+											</span>
+											<p className="paragraph font-medium font-NeueMontreal text-secondry pt-[12px]">
+												{item.title}
+											</p>
+											<p className="paragraph font-NeueMontreal text-[#20202199] pt-[10px] leading-[26px]">
+												{item.description}
+											</p>
+										</div>
+									))}
 								</div>
 							</div>
-						))}
+						</div>
 					</div>
 				</div>
 			</div>

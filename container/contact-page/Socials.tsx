@@ -10,7 +10,7 @@ import { Eyes } from "@/components";
 
 export default function Socials() {
 	const [rotate, setRotate] = useState(0);
-	const phrase = ["INSTAGRAM", "behance", "facebook", "linkedin"];
+	const phrase = ["INSTAGRAM", "linkedin", "facebook", "gmail"];
 	useEffect(() => {
 		window.addEventListener("mousemove", (e) => {
 			let mouseX = e.clientX;
@@ -41,7 +41,7 @@ export default function Socials() {
 						<TextMask>{phrase}</TextMask>
 					</h1>
 				</div>
-				<div className="w-full border-t border-[#21212155] pt-[20px]">
+				<div className="w-full border-t border-[#20202155] pt-[20px]">
 					<div className="w-full flex sm:flex-col xm:flex-col justify-between gap-y-[20px] padding-x">
 						<div className="w-[50%] sm:w-full xm:w-full">
 							<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
@@ -56,35 +56,25 @@ export default function Socials() {
 								<div className="flex flex-col gap-y-[10px]">
 									<LinkHover
 										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title={`202-1965 W 4th Awe`}
+										title={`Based in India`}
 										href="/"
 									/>
 									<LinkHover
 										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title={`Vancouver, Canada`}
-										href="/"
-									/>
-									<LinkHover
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="30 Chukarina"
-										href="/"
-									/>
-									<LinkHover
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="St Lviv, Ukraine"
+										title={`Serving clients worldwide`}
 										href="/"
 									/>
 								</div>
 							</div>
 							<div className="flex w-fit h-fit gap-x-[5px] group">
-								<div className="rounded-[50px] border-[2px] border-[#21212155] group-hover:bg-secondry  py-[3px] px-[12px] cursor-pointer">
+								<div className="rounded-[50px] border-[2px] border-[#20202155] group-hover:bg-secondry  py-[3px] px-[12px] cursor-pointer">
 									<Link
-										href="mailto:hello@ochi.design"
+										href="mailto:hello@thescalefunnel.com"
 										className="paragraph font-NeueMontreal text-secondry uppercase group-hover:text-background transition-all duration-200 ease-in">
-										hello@ochi.design
+										hello@thescalefunnel.com
 									</Link>
 								</div>
-								<div className="w-[33px] flex items-center justify-center h-[33px] border-[2px] border-[#21212155] rounded-[50px] group-hover:bg-secondry transition-all duration-200 ease-in cursor-pointer sm:hidden xm:hidden">
+								<div className="w-[33px] flex items-center justify-center h-[33px] border-[2px] border-[#20202155] rounded-[50px] group-hover:bg-secondry transition-all duration-200 ease-in cursor-pointer sm:hidden xm:hidden">
 									<p className="paragraph font-normal text-secondry group-hover:text-background">
 										<ArrowUpRight
 											size={24}
@@ -100,7 +90,7 @@ export default function Socials() {
 			<motion.div
 				className="w-full absolute top-[50%] transform translate-y-[-50%] gap-[30px] flex items-center justify-center"
 				style={{ y: mq }}>
-				<Eyes className="w-[230px] h-[230px] md:w-[200px] md:h-[200px] sm:w-[150px] sm:h-[150px] xm:w-[150px] xm:h-[150px] sm:flex-col xm:flex-col" />
+				<Eyes className="w-[160px] h-[160px] md:w-[140px] md:h-[140px] sm:w-[110px] sm:h-[110px] xm:w-[100px] xm:h-[100px] sm:flex-col xm:flex-col" />
 			</motion.div>
 		</section>
 	);

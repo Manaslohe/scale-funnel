@@ -1,70 +1,63 @@
 "use client";
-import Link from "next/link";
-import { Eyes } from "@/components";
+import Image from "next/image";
+import { logoIcon } from "@/public";
+import { RoundButton } from "@/components";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
 	return (
-		<section className="w-full min-h-screen">
+		<section className="w-full">
 			<div className="w-full flex flex-col justify-between">
 				<div className="w-full flex flex-col">
-					<div className="w-full margin padding-x">
+					<div className="w-full pt-[160px] pb-[60px] lg:pt-[140px] md:pt-[160px] sm:pt-[150px] xm:pt-[140px] padding-x">
 						<div>
-							<h1 className="heading tracking-[-1.3px] text-secondry font-semibold font-FoundersGrotesk uppercase">
-								THE SCALE <br />
-								<div className="flex items-center gap-[5px]">
+							<h1 className="text-[96px] leading-[102px] lg:text-[78px] lg:leading-[84px] md:text-[64px] md:leading-[70px] sm:text-[48px] sm:leading-[54px] xm:text-[40px] xm:leading-[46px] tracking-[0.005em] text-[#202021] font-semibold font-FoundersGrotesk uppercase">
+								<span className="block">WHO WE</span>
+								<div className="flex items-center gap-[8px] sm:gap-[6px] xm:gap-[4px]">
 									<motion.span
-										initial={{ width: 0 }}
-										animate={{ width: "auto" }}
+										initial={{ opacity: 0, x: -80 }}
+										animate={{ opacity: 1, x: 0 }}
 										transition={{
 											ease: [0.86, 0, 0.07, 0.995],
-											duration: 1,
-											delay: 1.5,
+											duration: 0.9,
+											delay: 1.2,
 										}}>
-										<span className="inline-block px-[16px] py-[4px] bg-accent rounded-[10px] text-white text-[40px] lg:text-[32px] md:text-[28px] sm:text-[22px] xm:text-[18px] leading-[1.2] font-NeueMontreal font-semibold normal-case tracking-normal whitespace-nowrap">
-											Who We Are
-										</span>
+										<Image
+											width={120}
+											height={50}
+											src={logoIcon}
+											alt="img"
+											className="w-auto h-[95px] lg:w-auto lg:h-auto md:w-[100px] md:h-[63px] sm:w-[74px] sm:h-[45px] xm:w-[64px] xm:h-[40px] object-contain xl:mt-[15px] mt-[10px]"
+										/>
 									</motion.span>
-									<h1 className="heading tracking-[-1.3px] text-secondry font-semibold font-FoundersGrotesk uppercase">
-										FUNNEL
-									</h1>
+									<span className="block">ARE</span>
 								</div>
 							</h1>
 						</div>
 					</div>
-					<div className="w-full border-t border-[#1B2B6B33] pt-[20px]">
-						<div className="w-full flex justify-between padding-x sm:flex-col xm:flex-col gap-[20px]">
-							<div className="w-[10%] sm:w-full xm:w-full">
-								<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
-									About us:
+					<div className="w-full border-t border-[#20202155] pt-[24px] pb-[27px]">
+						<div className="w-full flex justify-between padding-x sm:flex-col xm:flex-col gap-[24px]">
+							<div className="w-[18%] sm:w-full xm:w-full">
+								<h3 className="text-[28px] leading-[36px] lg:text-[26px] lg:leading-[34px] md:text-[24px] md:leading-[32px] sm:text-[20px] sm:leading-[28px] xm:text-[18px] xm:leading-[26px] font-semibold font-NeueMontreal text-secondry">
+									About us
 								</h3>
 							</div>
-							<div className="w-[48%] flex justify-between sm:w-full xm:w-full sm:flex-col xm:flex-col gap-[20px]">
-								<div className="w-[50%] flex flex-col gap-y-[40px] sm:w-full xm:w-full">
-									<div className="flex flex-col gap-y-[20px]">
-										<p className="paragraph font-NeueMontreal text-secondry">
-											The Scale Funnel wasn&apos;t built in a boardroom. It was built from years of first-hand experience watching talented coaches struggle with the one thing they shouldn&apos;t have to worry about — getting clients.
-										</p>
-									</div>
-									<div className="flex flex-col gap-y-[20px]">
-										<p className="paragraph font-NeueMontreal text-secondry">
-											We are three specialists who decided that coaching businesses deserve an agency that truly understands their world. One that doesn&apos;t just run campaigns — but builds complete growth systems.
-										</p>
-									</div>
-								</div>
-								<div className="flex w-fit h-fit gap-[5px] group">
-									<div className="rounded-[50px] border border-[#1B2B6B99] group-hover:bg-secondry py-[3px] px-[12px] cursor-pointer">
-										<Link
-											href="/contact"
-											className="paragraph font-NeueMontreal text-secondry uppercase group-hover:text-background transition-all duration-200 ease-in">
-											Let&apos;s Build Together
-										</Link>
-									</div>
-									<div className="w-[35px] flex items-center justify-center h-[35px] border border-[#1B2B6B99] rounded-[50px] p-[12px] group-hover:bg-secondry transition-all duration-200 ease-in cursor-pointer sm:hidden xm:hidden">
-										<p className="paragraph font-normal text-secondry group-hover:text-background">
-											<ArrowUpRight strokeWidth={1.25} />
-										</p>
+							<div className="w-[72%] sm:w-full xm:w-full flex flex-col gap-[16px]">
+								<p className="paragraph font-NeueMontreal text-secondry max-w-[760px]">
+									The Scale Funnel wasn&apos;t built in a boardroom. It was built from years of first-hand experience watching talented coaches struggle with the one thing they shouldn&apos;t have to worry about — getting clients.
+								</p>
+								<p className="paragraph font-NeueMontreal text-secondry max-w-[760px]">
+									We are three specialists who decided coaching businesses deserve an agency that truly understands their world.
+								</p>
+								<div className="pt-[4px]">
+									<div className="w-fit flex items-center justify-between bg-secondry cursor-pointer rounded-full group">
+										<RoundButton
+											href="/services"
+											title="our services"
+											bgcolor="#000"
+											className="bg-white text-black"
+											style={{ color: "#fff" }}
+										/>
 									</div>
 								</div>
 							</div>
@@ -72,17 +65,10 @@ export default function Hero() {
 					</div>
 				</div>
 			</div>
-			<div
-				className="padding-y"
-				data-scroll
-				data-scroll-speed="-.1">
-				<Eyes className="w-[300px] h-[300px] md:w-[200px] md:h-[200px] sm:w-[150px] sm:h-[150px] xm:w-[150px] xm:h-[150px] sm:flex-col xm:flex-col" />
-			</div>
-			<div className="padding-x">
-				<h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
-					Three specialists. One shared goal —{" "}
-					<br className="sm:hidden xm:hidden" />
-					your growth.
+			<div className="w-full h-[1px] bg-[#20202155]" />
+			<div className="padding-x pt-[50px] pb-[70px] lg:pt-[40px] lg:pb-[60px] md:pt-[36px] md:pb-[50px] sm:pt-[32px] sm:pb-[40px] xm:pt-[28px] xm:pb-[40px]">
+				<h1 className="sub-heading font-medium font-NeueMontreal text-secondry max-w-[900px] leading-[1.1]">
+					We help coaching businesses build growth systems that actually convert.
 				</h1>
 			</div>
 		</section>

@@ -19,9 +19,9 @@ export default function Eyes({ className }: { className: string }) {
 	}, []);
 
 	return (
-		<div className="w-full gap-[30px] flex items-center justify-center">
+		<div className="w-fit gap-[20px] sm:gap-[16px] xm:gap-[12px] flex items-center justify-center">
 			<div
-				className={`bg-white border-[2px] border-[#21212188] rounded-full flex items-center justify-center ${className}`}>
+				className={`bg-white border-[2px] border-[#20202188] rounded-full flex items-center justify-center ${className}`}>
 				<Image
 					style={{
 						transform: `rotate(${rotate}deg)`,
@@ -32,7 +32,7 @@ export default function Eyes({ className }: { className: string }) {
 				/>
 			</div>
 			<div
-				className={`bg-white border-[2px] border-[#21212188] rounded-full flex items-center justify-center ${className}`}>
+				className={`bg-white border-[2px] border-[#20202188] rounded-full flex items-center justify-center ${className}`}>
 				<Image
 					style={{
 						transform: `rotate(${rotate}deg)`,

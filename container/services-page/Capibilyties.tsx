@@ -1,107 +1,72 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
-import { Button } from "@/components";
+import Link from "next/link";
 import { serviceCapaybilitiesItem } from "@/constants";
 
 export default function Capibilyties() {
-	const [hovered, setHovered] = useState(false);
-	const [hovered1, setHovered1] = useState(false);
+	const item = serviceCapaybilitiesItem[0];
+
 	return (
 		<div className="w-full bg-about padding-y rounded-t-[20px]">
-			<div className="w-[82%] sm:w-full xm:w-full padding-x mb-[70px]">
-				<h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
+			<div className="w-[82%] sm:w-full xm:w-full padding-x mb-[50px]">
+				<p className="text-[42px] leading-[54px] lg:text-[38px] lg:leading-[48px] md:text-[34px] md:leading-[44px] sm:text-[28px] sm:leading-[38px] xm:text-[24px] xm:leading-[34px] font-bold font-NeueMontreal text-secondry text-justify">
 					<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-						Let’s be honest.
+						Let's be honest.
 					</span>
-					&nbsp;There are really no excuses to have a bad presentation anymore.
-					No one has time for poorly communicated ideas. Focus on what you do
-					best <span className="sm:hidden xm:hidden">—</span>
-					growing your business, while we do our best at
+					&nbsp;We've seen what happens when the wrong agency touches
+					a coaching business — wasted budget, generic messaging,
+					and a funnel that was never built for how coaches actually
+					sell. Focus on what you do best
+					<span className="sm:hidden xm:hidden"> —</span> coaching
+					your clients, while we do our best at
 					<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-						&nbsp;making your presentations awesome.
+						&nbsp;building the growth system behind it.
 					</span>
-				</h1>
+				</p>
 			</div>
-			<div className="w-full flex sm:flex-col xm:flex-col justify-between py-[20px] padding-x border-t border-[#21212155] sm:gap-[15px] xm:gap-[15px]">
-				<div className="w-[10%] sm:w-full xm:w-full">
-					<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
-						Our Capabilities:
-					</h3>
-				</div>
-				<div className="w-[90%] flex flex-col gap-y-[30px]">
-					{serviceCapaybilitiesItem.map((item) => (
-						<div
-							className="w-full flex sm:flex-col xm:flex-col justify-between sm:gap-[15px] xm:gap-[15px]"
-							key={item.id}>
-							<div className="w-[40%] flex justify-end mr-[150px] sm:hidden xm:hidden">
-								{hovered && item.id === 1 ? (
-									<Image
-										src={item.src1}
-										alt="img"
-										width={300}
-										height={200}
-										className="w-[300px] h-[200px] rounded-[20px]"
-									/>
-								) : (
-									hovered1 &&
-									item.id === 1 && (
-										<Image
-											src={item.src2}
-											alt="img"
-											width={300}
-											height={200}
-											className="w-[300px] h-[200px] rounded-[20px]"
-										/>
-									)
-								)}
-							</div>
-							<div className="w-[25%] sm:w-full xm:w-full">
-								<div className="flex gap-x-[10px] flex-col">
-									<div className="flex items-center gap-x-[10px] pb-[20px]">
-										<span className="w-[12px] h-[12px] rounded-full bg-secondry" />
-										<h1 className="paragraph uppercase font-medium font-NeueMontreal text-secondry">
-											{item.title1}
-										</h1>
-									</div>
-								</div>
-								<div
-									className="flex flex-col gap-y-[5px]"
-									onMouseEnter={() => setHovered(item.id === 1 && true)}
-									onMouseLeave={() => setHovered(item.id === 1 && false)}>
-									{item.links1.map((link) => (
-										<Button
-											href={link.href}
-											title={link.title}
-											key={link.id}
-										/>
-									))}
-								</div>
-							</div>
-							<div className="w-[25%] sm:w-full xm:w-full">
-								<div className="flex gap-x-[10px] flex-col">
-									<div className="flex items-center gap-x-[10px] pb-[20px]">
-										<span className="w-[12px] h-[12px] rounded-full bg-secondry" />
-										<h1 className="paragraph uppercase font-medium font-NeueMontreal text-secondry">
-											{item.title2}
-										</h1>
-									</div>
-								</div>
-								<div
-									className="flex flex-col gap-y-[5px]"
-									onMouseEnter={() => setHovered1(item.id === 1 && true)}
-									onMouseLeave={() => setHovered1(item.id === 1 && false)}>
-									{item.links2.map((link) => (
-										<Button
-											href={link.href}
-											title={link.title}
-											key={link.id}
-										/>
-									))}
-								</div>
-							</div>
+
+			<div className="w-full padding-x border-t border-[#20202155] pt-[40px]">
+				<h3 className="text-[28px] leading-[36px] lg:text-[26px] lg:leading-[34px] md:text-[24px] md:leading-[32px] sm:text-[20px] sm:leading-[28px] font-bold font-NeueMontreal text-secondry mb-[30px]">
+					Who We Help
+				</h3>
+
+				<div className="w-full grid grid-cols-2 sm:grid-cols-1 xm:grid-cols-1 gap-[24px]">
+					<div className="p-[28px] rounded-[20px] border border-[#20202133] bg-white/50">
+						<div className="flex items-center gap-[10px] mb-[24px]">
+							<span className="w-[10px] h-[10px] rounded-full bg-orange shrink-0" />
+							<h4 className="paragraph uppercase font-medium font-NeueMontreal text-secondry tracking-[0.04em]">
+								{item.title1}
+							</h4>
 						</div>
-					))}
+						<div className="flex flex-wrap gap-[10px]">
+							{item.links1.map((link) => (
+								<Link
+									key={link.id}
+									href={link.href}
+									className="small-text font-NeueMontreal text-secondry uppercase px-[14px] py-[6px] rounded-full border border-[#20202133] hover:bg-secondry hover:text-white hover:border-secondry transition-all duration-300">
+									{link.title}
+								</Link>
+							))}
+						</div>
+					</div>
+
+					<div className="p-[28px] rounded-[20px] border border-[#20202133] bg-white/50">
+						<div className="flex items-center gap-[10px] mb-[24px]">
+							<span className="w-[10px] h-[10px] rounded-full bg-navy shrink-0" />
+							<h4 className="paragraph uppercase font-medium font-NeueMontreal text-secondry tracking-[0.04em]">
+								{item.title2}
+							</h4>
+						</div>
+						<div className="flex flex-wrap gap-[10px]">
+							{item.links2.map((link) => (
+								<Link
+									key={link.id}
+									href={link.href}
+									className="small-text font-NeueMontreal text-secondry uppercase px-[14px] py-[6px] rounded-full border border-[#20202133] hover:bg-navy hover:text-white hover:border-navy transition-all duration-300">
+									{link.title}
+								</Link>
+							))}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

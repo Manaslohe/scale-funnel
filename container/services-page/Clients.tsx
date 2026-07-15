@@ -7,9 +7,7 @@ import { serviceClientsItem } from "@/constants";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Clients() {
-	const [activeAccordion, setActiveAccordion] = useState(
-		serviceClientsItem[0].id,
-	);
+	const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
 	const toggleAccordion = (itemId: any) => {
 		setActiveAccordion((prev) => (prev === itemId ? null : itemId));
 	};
@@ -23,8 +21,8 @@ export default function Clients() {
 					key={item.id}
 					className={`w-full flex py-[10px] flex-col ${
 						item.id == 1
-							? "border-y border-[#21212155]"
-							: "border-b border-[#21212155]"
+							? "border-y border-[#20202155]"
+							: "border-b border-[#20202155]"
 					}`}>
 					<div className="w-full flex items-center justify-between py-[10px] padding-x">
 						<div className="w-[50%] flex items-center">
@@ -101,13 +99,11 @@ export default function Clients() {
 											duration: 1.3,
 										}}>
 										<div className="flex flex-col gap-[20px] py-[30px]">
-											<div className="w-[130px] h-[130px]">
-												<Image
-													src={item.src}
-													alt="clientImg"
-													className="w-full h-full object-cover rounded-[10px]"
-												/>
-											</div>
+											<div className="w-[80px] h-[80px] rounded-full bg-navy flex items-center justify-center">
+										<span className="text-white font-NeueMontreal font-medium text-[24px]">
+											{item.initials}
+										</span>
+									</div>
 											<div className="">
 												<p className="small-text tracking-wider font-normal font-NeueMontreal text-secondry">
 													{item.review}

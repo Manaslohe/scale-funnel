@@ -12,7 +12,7 @@ export default function Tags({
 }) {
 	return (
 		<div
-			className="w-fit rounded-[50px] border border-[#21212199] cursor-pointer"
+			className="w-fit rounded-[50px] border border-[#20202199] cursor-pointer"
 			key={item.id}>
 			<Link
 				className={`small-text font-NeueMontreal uppercase ${className}`}

@@ -1,12 +1,11 @@
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { serviceProcessItems } from "@/constants";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Process() {
-	const [activeAccordion, setActiveAccordion] = useState(
-		serviceProcessItems[0].id,
-	);
+	const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
 	const toggleAccordion = (itemId: any) => {
 		setActiveAccordion((prev) => (prev === itemId ? null : itemId));
 	};
@@ -23,8 +22,8 @@ export default function Process() {
 					key={item.id}
 					className={`w-full flex py-[10px] flex-col ${
 						item.id == 1
-							? "border-y border-[#21212155]"
-							: "border-b border-[#21212155]"
+							? "border-y border-[#20202155]"
+							: "border-b border-[#20202155]"
 					}`}>
 					<div className="w-full flex items-center justify-between py-[10px] padding-x">
 						<div className="w-[50%] sm:w-full xm:w-full">
@@ -76,6 +75,11 @@ export default function Process() {
 													{item.review}
 												</p>
 											</div>
+										<Link
+											href="/contact"
+											className="paragraph font-medium font-NeueMontreal text-orange uppercase w-fit hover">
+											Book a Strategy Call →
+										</Link>
 										</div>
 									</motion.div>
 								)}
