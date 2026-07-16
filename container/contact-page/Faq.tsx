@@ -1,35 +1,44 @@
 "use client";
 import { useState } from "react";
-import { FaqItems } from "@/constants";
+import { FaqItems, clientsItem } from "@/constants";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Faq() {
-	const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
+	const [activeAccordion, setActiveAccordion] = useState(clientsItem[0].id);
 	const toggleAccordion = (itemId: any) => {
 		setActiveAccordion((prev) => (prev === itemId ? null : itemId));
 	};
 
 	return (
 		<section className="w-full padding-y mt-[-10px] bg-background z-30 relative rounded-t-[20px]">
-			<h1 className="sub-heading padding-x font-medium font-NeueMontreal text-secondry pb-[50px]">
+			<motion.h1
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, margin: "-60px" }}
+				transition={{ duration: 0.55, ease: [0.33, 1, 0.68, 1] }}
+				className="sub-heading padding-x font-medium font-NeueMontreal text-secondry pb-[50px]">
 				A few things you <br />
 				may want to ask us:
-			</h1>
-			{FaqItems.map((item) => (
-				<div
+			</motion.h1>
+			{FaqItems.map((item, index) => (
+				<motion.div
 					key={item.id}
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, margin: "-40px" }}
+					transition={{ duration: 0.5, delay: index * 0.06, ease: [0.33, 1, 0.68, 1] }}
 					className={`w-full flex py-[10px] flex-col ${
 						item.id == 1
-							? "border-y border-[#20202155]"
-							: "border-b border-[#20202155]"
+							? "border-y border-[#21212155]"
+							: "border-b border-[#21212155]"
 					}`}>
-					<div className="w-full flex items-center justify-between sm:gap-[15px] xm:gap-[15px] py-[10px] padding-x">
+					<div className="w-full flex items-start justify-between sm:flex-col sm:items-start xm:flex-col xm:items-start sm:gap-[15px] xm:gap-[15px] py-[10px] padding-x">
 						<div className="w-[50%] sm:w-full xm:w-full">
 							<h1 className="paragraph font-normal font-NeueMontreal text-secondry">
 								{item.question}
 							</h1>
 						</div>
-						<div className="w-[50%] sm:w-full xm:w-full flex items-center justify-between">
+						<div className="w-[50%] sm:w-full xm:w-full flex items-center justify-between sm:justify-start xm:justify-start sm:gap-[12px] xm:gap-[12px]">
 							<div>
 								<h3 className="paragraph font-normal font-NeueMontreal text-secondry">
 									{item.title}
@@ -70,7 +79,10 @@ export default function Faq() {
 											{item.links.map((link) => (
 												<div
 													key={link.id}
-													className="pt-[20px]">
+													className="flex pt-[20px] sm:flex-col xm:flex-col sm:gap-[20px] xm:gap-[20px] justify-between gap-[80px]">
+													<span className="paragraph tracking-wider font-normal font-NeueMontreal text-secondry">
+														{link.title}
+													</span>
 													<p className="paragraph tracking-wider font-normal font-NeueMontreal text-secondry">
 														{link.description}
 													</p>
@@ -82,7 +94,7 @@ export default function Faq() {
 							</AnimatePresence>
 						</div>
 					</div>
-				</div>
+				</motion.div>
 			))}
 		</section>
 	);

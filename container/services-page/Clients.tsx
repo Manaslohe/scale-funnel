@@ -7,29 +7,40 @@ import { serviceClientsItem } from "@/constants";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Clients() {
-	const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
+	const [activeAccordion, setActiveAccordion] = useState(
+		serviceClientsItem[0].id,
+	);
 	const toggleAccordion = (itemId: any) => {
 		setActiveAccordion((prev) => (prev === itemId ? null : itemId));
 	};
 	return (
 		<section className="w-full padding-y">
-			<h1 className="sub-heading padding-x font-medium font-NeueMontreal text-secondry pb-[50px]">
+			<motion.h1
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, margin: "-60px" }}
+				transition={{ duration: 0.55, ease: [0.33, 1, 0.68, 1] }}
+				className="sub-heading padding-x font-medium font-NeueMontreal text-secondry pb-[50px]">
 				Clients’ reviews
-			</h1>
-			{serviceClientsItem.map((item) => (
-				<div
+			</motion.h1>
+			{serviceClientsItem.map((item, index) => (
+				<motion.div
 					key={item.id}
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, margin: "-40px" }}
+					transition={{ duration: 0.5, delay: index * 0.06, ease: [0.33, 1, 0.68, 1] }}
 					className={`w-full flex py-[10px] flex-col ${
 						item.id == 1
-							? "border-y border-[#20202155]"
-							: "border-b border-[#20202155]"
+							? "border-y border-[#21212155]"
+							: "border-b border-[#21212155]"
 					}`}>
 					<div className="w-full flex items-center justify-between py-[10px] padding-x">
 						<div className="w-[50%] flex items-center">
 							<div className="w-[40%] sm:w-auto xm:w-auto">
 								<Link
 									href={item.href}
-									className="small-text font-normal font-NeueMontreal text-secondry link-flash">
+									className="small-text font-normal font-NeueMontreal text-secondry">
 									{item.website}
 								</Link>
 							</div>
@@ -99,11 +110,13 @@ export default function Clients() {
 											duration: 1.3,
 										}}>
 										<div className="flex flex-col gap-[20px] py-[30px]">
-											<div className="w-[80px] h-[80px] rounded-full bg-navy flex items-center justify-center">
-										<span className="text-white font-NeueMontreal font-medium text-[24px]">
-											{item.initials}
-										</span>
-									</div>
+											<div className="w-[130px] h-[130px]">
+												<Image
+													src={item.src}
+													alt="clientImg"
+													className="w-full h-full object-cover rounded-[10px]"
+												/>
+											</div>
 											<div className="">
 												<p className="small-text tracking-wider font-normal font-NeueMontreal text-secondry">
 													{item.review}
@@ -116,7 +129,7 @@ export default function Clients() {
 						</div>
 						<div className="w-[10%] sm:w-auto xm:w-auto" />
 					</div>
-				</div>
+				</motion.div>
 			))}
 		</section>
 	);

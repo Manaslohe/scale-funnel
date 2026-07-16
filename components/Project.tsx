@@ -76,7 +76,7 @@ export default function Project({ item }: { item: any }) {
 						href={"/presentation"}>
 						<Rounded
 							className="py-[10px]"
-							backgroundColor="#202021">
+							backgroundColor="#212121">
 							<p className="text-secondry z-10 px-[15px] ml-[30px] py-[10px] group-hover:text-white">
 								view all case studies
 							</p>

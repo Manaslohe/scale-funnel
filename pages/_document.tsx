@@ -5,7 +5,9 @@ export default function Document() {
     <Html lang="en">
       <title>The Scale Funnel - Performance Marketing for Coaches</title>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="description" content="The Scale Funnel — Performance Marketing Agency for Coaches, Consultants and Course Creators. We build, launch, and scale Meta ads, funnels, automation, and growth systems." />
+        <meta name="theme-color" content="#1B2B6B" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
       </Head>
       <body>
         <Main />

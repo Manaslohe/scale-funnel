@@ -1,91 +1,133 @@
 "use client";
-import Link from "next/link";
 import { useState } from "react";
 import { Marquee } from "@/components";
 import { TextHover } from "@/animation";
 import { expectationsItems } from "@/constants";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+
+const cardThemes = [
+	{
+		bg: "bg-[#1B2B6B]",
+		number: "text-white/20",
+		border: "border-white/12",
+		hoverBorder: "hover:border-white/25",
+	},
+	{
+		bg: "bg-[#F47B20]",
+		number: "text-white/25",
+		border: "border-white/15",
+		hoverBorder: "hover:border-white/30",
+	},
+	{
+		bg: "bg-[#145B52]",
+		number: "text-white/20",
+		border: "border-white/12",
+		hoverBorder: "hover:border-white/25",
+	},
+	{
+		bg: "bg-[#3730A3]",
+		number: "text-white/20",
+		border: "border-white/12",
+		hoverBorder: "hover:border-white/25",
+	},
+	{
+		bg: "bg-[#0F4C75]",
+		number: "text-white/20",
+		border: "border-white/12",
+		hoverBorder: "hover:border-white/25",
+	},
+	{
+		bg: "bg-[#C2410C]",
+		number: "text-white/25",
+		border: "border-white/15",
+		hoverBorder: "hover:border-white/30",
+	},
+];
 
 export default function Expectations() {
 	const [openItemId, setOpenItemId] = useState<number | null>(null);
 
-	const handleButtonClick = (id: number) => {
+	const handleCardClick = (id: number) => {
 		setOpenItemId(openItemId === id ? null : id);
 	};
 
+	const isBottomRowOpen = openItemId !== null && openItemId >= 4;
+
 	return (
-		<section className="w-full bg-marquee padding-y rounded-t-[20px] relative z-20">
-			<div className="w-full bg-marquee relative rounded-t-[20px] py-[40px] lg:py-[32px] md:py-[26px] sm:py-[20px] xm:py-[16px]">
+		<section className="w-full">
+			{/* Blue banner — matches homepage sizing & spacing */}
+			<div className="w-full bg-marquee z-10 relative rounded-t-[20px] padding-y mt-[150px] lg:mt-[130px] md:mt-[110px] sm:mt-[90px] xm:mt-[70px]">
 				<Marquee
-					title="why choose us"
-					forceForward
-					className="text-[180px] leading-[150px] lg:text-[130px] lg:leading-[110px] md:text-[95px] md:leading-[80px] sm:text-[62px] sm:leading-[52px] xm:text-[38px] xm:leading-[32px]"
+					title="why us other"
+					className="pb-[50px] lg:pb-[40px] md:pb-[30px] sm:pb-[20px] xm:pb-[15px] text-[540px] leading-[330px] lg:text-[380px] lg:leading-[240px] md:text-[300px] md:leading-[160px] sm:text-[230px] sm:leading-[140px] xm:text-[130px] xm:leading-[80px]"
 				/>
 			</div>
-			<div className="w-full padding-x py-[20px]">
-				<h2 className="sub-heading font-medium font-NeueMontreal text-white pb-[30px]">
-					What Makes Us Different?
+
+			<div className={`w-full bg-marquee padding-x pt-[80px] lg:pt-[70px] md:pt-[60px] sm:pt-[50px] xm:pt-[40px] pb-[80px] lg:pb-[60px] md:pb-[50px] sm:pb-[40px] xm:pb-[40px] relative z-20 ${isBottomRowOpen ? "pb-[280px] lg:pb-[240px] md:pb-[200px]" : ""}`}>
+				<h2 className="section-heading !text-white mb-[50px] sm:mb-[40px] xm:mb-[32px]">
+					What You Can Expect
 				</h2>
-				<Link
-					href="/contact"
-					className="paragraph font-medium font-NeueMontreal text-white uppercase underline w-fit inline-block mb-[30px]">
-					Work with us →
-				</Link>
 
-				<h3 className="paragraph font-medium text-white font-NeueMontreal mb-[24px]">
-					What you can expect?
-				</h3>
+				<div className="w-full grid grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xm:grid-cols-1 gap-[20px] items-start">
+					{expectationsItems.map((item, index) => {
+						const theme = cardThemes[index % cardThemes.length];
+						const isOpen = openItemId === item.id;
 
-				<div className="w-full grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xm:grid-cols-1 gap-[20px]">
-					{expectationsItems.map((item) => (
-						<div
-							className="w-full"
-							key={item.id}>
-							<div className="bg-[#1F1C52] w-full h-full flex flex-col rounded-[20px] px-[30px] py-[20px]">
-								<div className="flex gap-x-[10px] items-center pb-[10px] mb-[80px]">
-									<h1 className="sub-heading font-normal font-NeueMontreal text-white">
-										{item.title1}
-									</h1>
-								</div>
-								<div className="w-full flex justify-between items-center mt-auto">
-									<button className="small-text font-normal font-NeueMontreal text-white">
-										<TextHover
-											titile1={item.subTitle1}
-											titile2={item.subTitle1}
-										/>
-									</button>
-									<button
-										onClick={() => handleButtonClick(item.id)}
-										className="small-text uppercase font-normal font-NeueMontreal text-white">
-										{openItemId === item.id ? (
-											"hide"
-										) : (
+						return (
+							<motion.div
+								key={item.id}
+								className="relative"
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, margin: "-40px" }}
+								transition={{ duration: 0.5, delay: index * 0.06, ease: [0.33, 1, 0.68, 1] }}>
+								<div
+									onClick={() => handleCardClick(item.id)}
+									className={`${theme.bg} ${theme.border} ${theme.hoverBorder} w-full flex flex-col rounded-[20px] px-[28px] py-[24px] border cursor-pointer transition-all duration-500 hover:shadow-[0_16px_40px_rgba(0,0,0,0.25)] min-h-[200px] overflow-hidden`}>
+									<div className="flex gap-x-[10px] items-center pb-[10px] mb-[40px] sm:mb-[32px]">
+										<h3
+											className={`font-FoundersGrotesk font-black text-[48px] sm:text-[40px] ${theme.number} leading-none`}>
+											{item.title1}
+										</h3>
+									</div>
+									<div className="w-full flex justify-between items-end mt-auto">
+										<p className="small-text font-medium font-NeueMontreal text-white text-left pr-[12px]">
 											<TextHover
-												titile1={item.btn}
-												titile2={item.btn}
+												titile1={item.subTitle1}
+												titile2={item.subTitle1}
 											/>
-										)}
-									</button>
-								</div>
-								<AnimatePresence>
-									{openItemId === item.id && (
+										</p>
 										<motion.div
-											initial={{ opacity: 0, height: 0 }}
-											animate={{ opacity: 1, height: "auto" }}
-											exit={{ opacity: 0, height: 0 }}
-											transition={{
-												ease: [0.4, 0, 0.2, 1],
-												duration: 1,
-											}}>
-											<div className="border-t border-[#F7F5F155] pt-[20px] text-background mt-[10px]">
-												{item.para1}
-											</div>
+											animate={{ rotate: isOpen ? 180 : 0 }}
+											transition={{ duration: 0.35, ease: [0.33, 1, 0.68, 1] }}
+											className="text-white/50 shrink-0">
+											<ChevronDown size={16} strokeWidth={1.5} />
 										</motion.div>
-									)}
-								</AnimatePresence>
-							</div>
-						</div>
-					))}
+									</div>
+
+									{/* In-flow expand panel */}
+									<AnimatePresence>
+										{isOpen && (
+											<motion.div
+												initial={{ height: 0, opacity: 0 }}
+												animate={{ height: "auto", opacity: 1 }}
+												exit={{ height: 0, opacity: 0 }}
+												transition={{
+													duration: 0.35,
+													ease: [0.33, 1, 0.68, 1],
+												}}
+												className="overflow-hidden">
+												<div className="border-t border-white/15 pt-[16px] mt-[16px] text-[15px] leading-[24px] font-NeueMontreal text-white/85">
+													{item.para1}
+												</div>
+											</motion.div>
+										)}
+									</AnimatePresence>
+								</div>
+							</motion.div>
+						);
+					})}
 				</div>
 			</div>
 		</section>

@@ -1,32 +1,35 @@
 "use client";
 import { useEffect } from "react";
-import { Curve, Marquee, ReadyFooterStack, IntroLoader } from "@/components";
-import { About, Clients, Hero, Projects } from "@/container";
+import { Curve, Marquee, Ready } from "@/components";
+import { About, Clients, Hero, Projects, VideoHome } from "@/container";
 
 export default function Home() {
 	useEffect(() => {
+		let locomotiveScroll: any;
 		(async () => {
 			const LocomotiveScroll = (await import("locomotive-scroll")).default;
-			const locomotiveScroll = new LocomotiveScroll();
+			locomotiveScroll = new LocomotiveScroll();
 		})();
+		return () => {
+			if (locomotiveScroll) locomotiveScroll.destroy();
+		};
 	}, []);
 
 	return (
 		<>
-			<IntroLoader />
-			<Curve backgroundColor={"#F7F5F1"}>
+			<Curve backgroundColor={"#f1f1f1"}>
 				<Hero />
-				<div className="w-full bg-marquee relative rounded-t-[20px] -mt-[3px] py-[40px] lg:py-[32px] md:py-[26px] sm:py-[20px] xm:py-[16px]">
+				<div className="w-full bg-marquee z-10 relative rounded-t-[20px] padding-y mt-[150px] lg:mt-[130px] md:mt-[110px] sm:mt-[90px] xm:mt-[70px]">
 					<Marquee
-						title="the scale funnel"
-						forceForward
-						className="text-[180px] leading-[150px] lg:text-[130px] lg:leading-[110px] md:text-[95px] md:leading-[80px] sm:text-[62px] sm:leading-[52px] xm:text-[38px] xm:leading-[32px]"
+						title="The Scale Funnel"
+						className="pb-[50px] lg:pb-[40px] md:pb-[30px] sm:pb-[20px] xm:pb-[15px] text-[540px] leading-[330px] lg:text-[380px] lg:leading-[240px] md:text-[300px] md:leading-[160px] sm:text-[230px] sm:leading-[140px] xm:text-[130px] xm:leading-[80px]"
 					/>
 				</div>
 				<About />
+				<VideoHome />
 				<Projects />
 				<Clients />
-				<ReadyFooterStack />
+				<Ready />
 			</Curve>
 		</>
 	);

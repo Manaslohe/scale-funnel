@@ -4,31 +4,33 @@ import {
 	Clientsservices,
 	Expectations,
 	Process,
-	Phases,
 	Archive,
 	Heroservices,
 } from "@/container";
 import { useEffect } from "react";
-import { Curve, ReadyFooterStack } from "@/components";
+import { Curve, Ready } from "@/components";
 
 export default function Services() {
 	useEffect(() => {
+		let locomotiveScroll: any;
 		(async () => {
 			const LocomotiveScroll = (await import("locomotive-scroll")).default;
-			const locomotiveScroll = new LocomotiveScroll();
+			locomotiveScroll = new LocomotiveScroll();
 		})();
+		return () => {
+			if (locomotiveScroll) locomotiveScroll.destroy();
+		};
 	}, []);
 	return (
 		<>
-			<Curve backgroundColor={"#F7F5F1"}>
+			<Curve backgroundColor={"#f1f1f1"}>
 				<Heroservices />
 				<Process />
-				<Phases />
 				<Capibilyties />
 				<Clientsservices />
 				<Archive />
 				<Expectations />
-				<ReadyFooterStack />
+				<Ready />
 			</Curve>
 		</>
 	);

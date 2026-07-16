@@ -1,94 +1,167 @@
 "use client";
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useContext } from "react";
 import { motion } from "framer-motion";
-import { logoIcon } from "@/public";
-import {
-	isIntroFinished,
-	shouldShowIntroLoader,
-	subscribeIntroFinish,
-} from "@/lib/introLoader";
+import { RoundButton } from "@/components";
+import { FirstLoadContext } from "@/components/Curve/Curve";
+
+const logoEase = [0.33, 1, 0.68, 1];
+const revealDuration = 1.4;
 
 export default function Hero() {
-	const [loaderPlaying] = useState(() => shouldShowIntroLoader());
-	const [visible, setVisible] = useState(() => isIntroFinished());
+	const { loaderVisible, loaderExpanding } = useContext(FirstLoadContext);
+	const showHeroContent = loaderExpanding || !loaderVisible;
+	const animateHero = showHeroContent;
+	const showIsOur = showHeroContent;
 
-	useEffect(() => {
-		if (!loaderPlaying) return;
-		return subscribeIntroFinish(() => setVisible(true));
-	}, [loaderPlaying]);
+	const fadeIn = {
+		hidden: { opacity: 0, y: 18 },
+		visible: { opacity: 1, y: 0 },
+	};
 
 	return (
 		<section
-			className="w-full pt-[160px] pb-[90px] lg:pt-[140px] md:pt-[160px] sm:pt-[150px] xm:pt-[140px] sm:pb-[60px] xm:pb-[60px]"
+			className="hero-section w-full h-screen"
 			data-scroll
-			data-scroll-speed="0"
-			aria-hidden={!visible}
-			style={{
-				visibility: visible ? "visible" : "hidden",
-			}}>
-			<div className="w-full flex flex-col gap-[77px] md:gap-[53px] sm:gap-[41px] xm:gap-[33px]">
-				<div className="w-full flex justify-between gap-[20px] padding-x">
-					<div>
-						<p className="small-text uppercase tracking-[0.1em] text-orange font-medium font-NeueMontreal mb-[22px] sm:mb-[18px] xm:mb-[16px]">
-							Performance Marketing for Coaches, Consultants &amp; Course Creators
-						</p>
-						<h1 className="heading tracking-[0.005em] text-secondry font-semibold font-FoundersGrotesk uppercase">
-							your growth <br />
-							<div className="flex items-center gap-[20px] md:gap-[14px] sm:gap-[10px] xm:gap-[8px] mt-[4px] sm:mt-[2px]">
-								<motion.span
-									initial={{ opacity: 0, x: -80 }}
-									animate={
-										loaderPlaying && !visible
-											? { opacity: 0, x: -80 }
-											: { opacity: 1, x: 0 }
-									}
-									transition={{
-										ease: [0.86, 0, 0.07, 0.995],
-										duration: 0.9,
-										delay: loaderPlaying ? 0 : 0.4,
-									}}
-									className="leading-[130px] lg:leading-[100px] md:leading-[72px] sm:leading-[52px] xm:leading-[44px] flex-shrink-0">
-									<Image
-										width={103}
-										height={154}
-										src={logoIcon}
-										alt="img"
-										className="w-auto h-[95px] lg:w-auto lg:h-[85px] md:w-auto md:h-[63px] sm:w-auto sm:h-[45px] xm:w-auto xm:h-[40px] object-contain"
-									/>
-								</motion.span>
-								<span className="heading tracking-[0.005em] text-secondry font-semibold font-FoundersGrotesk uppercase">
-									is our
+			data-scroll-speed="-.3">
+			<div className="w-full h-full flex flex-col justify-between">
+				{/* Spacer for fixed navbar */}
+				<div />
+
+				<div className="w-full flex flex-col justify-between h-[75vh] sm:h-[85vh] xm:h-[85vh]">
+					<div className="w-full flex flex-col gap-[20px] pl-[50px] md:pl-[30px] sm:pl-[20px] xm:pl-[20px]">
+						{/* Pre-headline */}
+						<motion.p
+							variants={fadeIn}
+							initial="hidden"
+							animate={showHeroContent ? "visible" : "hidden"}
+							transition={{ ease: logoEase, duration: revealDuration, delay: 0.05 }}
+							className="paragraph font-NeueMontreal text-secondry opacity-70 uppercase tracking-[3px] text-[13px]">
+							Performance Marketing for Coaches, Consultants and Course Creators
+						</motion.p>
+
+						{/* Main Headline */}
+						<h1 className="heading tracking-[-1.3px] text-secondry font-semibold font-FoundersGrotesk uppercase flex flex-col gap-0 leading-[0.85] lg:leading-[0.85] md:leading-[0.85] sm:leading-[0.85] xm:leading-[0.85]">
+							<motion.div
+								variants={fadeIn}
+								initial="hidden"
+								animate={showHeroContent ? "visible" : "hidden"}
+								transition={{ ease: logoEase, duration: revealDuration, delay: 0.1 }}>
+								YOUR GROWTH
+							</motion.div>
+
+							{/* Line 2: [triangle icon] IS OUR — logo space reserved, both animate in together */}
+							<div className="flex items-center gap-[15px] sm:gap-[8px] xm:gap-[5px]">
+
+								{/* Scale Funnel logo mark — dot first, then bottom to top */}
+								<span className="hero-logo inline-flex flex-col items-center justify-end shrink-0 self-center overflow-visible h-[112px] lg:h-[98px] md:h-[80px] sm:h-[58px] xm:h-[50px] w-[76px] lg:w-[68px] md:w-[55px] sm:w-[40px] xm:w-[34px] pt-[14px] lg:pt-[12px] md:pt-[10px] sm:pt-[8px] xm:pt-[6px]">
+
+									{/* Big navy triangle — last to appear */}
+									<motion.span
+										initial={{ y: "110%", opacity: 0 }}
+										animate={animateHero ? { y: "0%", opacity: 1 } : { y: "110%", opacity: 0 }}
+										transition={{ ease: logoEase, duration: 0.6, delay: showHeroContent ? 0.85 : 0 }}
+										className="block leading-none">
+										<svg
+											viewBox="0 0 60 52"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
+											className="w-[66px] lg:w-[58px] md:w-[48px] sm:w-[34px] xm:w-[30px] h-auto block">
+											<path d="M30 0L60 52H0L30 0Z" fill="#1B2B6B" />
+										</svg>
+									</motion.span>
+
+									{/* Orange triangle — second */}
+									<motion.span
+										initial={{ y: "110%", opacity: 0 }}
+										animate={animateHero ? { y: "0%", opacity: 1 } : { y: "110%", opacity: 0 }}
+										transition={{ ease: logoEase, duration: 0.6, delay: showHeroContent ? 0.55 : 0 }}
+										className="block leading-none -mt-[2px]">
+										<svg
+											viewBox="0 0 42 36"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
+											className="w-[46px] lg:w-[40px] md:w-[33px] sm:w-[24px] xm:w-[21px] h-auto block">
+											<path d="M21 0L42 36H0L21 0Z" fill="#F47B20" />
+										</svg>
+									</motion.span>
+
+									{/* Dot — first to appear */}
+									<motion.span
+										initial={{ scale: 0, opacity: 0 }}
+										animate={animateHero ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+										transition={{ ease: logoEase, duration: 0.45, delay: showHeroContent ? 0.25 : 0 }}
+										className="block leading-none mt-[2px]">
+										<svg
+											viewBox="0 0 14 14"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
+											className="w-[12px] lg:w-[10px] md:w-[9px] sm:w-[7px] xm:w-[6px] h-auto block">
+											<circle cx="7" cy="7" r="7" fill="#F47B20" />
+										</svg>
+									</motion.span>
 								</span>
+
+								<motion.span
+									initial={{ opacity: 0, x: -6 }}
+									animate={showIsOur ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
+									transition={{ ease: logoEase, duration: revealDuration, delay: 0.15 }}
+								>
+									IS OUR
+								</motion.span>
 							</div>
-							<span className="text-orange block mt-[2px] sm:mt-[0px]">goal.</span>
+
+							<motion.div
+								variants={fadeIn}
+								initial="hidden"
+								animate={showHeroContent ? "visible" : "hidden"}
+								transition={{ ease: logoEase, duration: revealDuration, delay: 0.2 }}
+								className="text-accent">
+								GOAL.
+							</motion.div>
 						</h1>
 					</div>
-				</div>
-				<div className="w-full flex flex-col border-t border-[#20202155] pt-[24px] gap-[30px] sm:gap-[24px] xm:gap-[20px]">
-					<div className="flex justify-between items-start padding-x gap-[40px] md:gap-[32px] sm:flex-col sm:gap-[20px] xm:flex-col xm:gap-[18px]">
-						<p className="flex-1 paragraph font-NeueMontreal text-secondry">
-							Performance marketing for coaches, consultants and
-							course creators
-						</p>
-						<p className="flex-1 paragraph font-NeueMontreal text-secondry text-right sm:text-left xm:text-left">
-							The only marketing agency your coaching business
-							will ever need
-						</p>
-					</div>
-					<div className="w-full flex items-center overflow-hidden justify-center xm:hidden sm:hidden">
-						<motion.p
-							initial={{ y: "-100%", opacity: 0 }}
-							animate={{ y: "100%", opacity: 0.5 }}
-							transition={{
-								duration: 1.8,
-								repeat: Infinity,
-								ease: [0.3, 0.86, 0.36, 0.95],
-							}}
-							className="paragraph opacity-50 font-NeueMontreal text-secondry">
-							scroll down
-						</motion.p>
-					</div>
+
+					<motion.div
+						variants={fadeIn}
+						initial="hidden"
+						animate={showHeroContent ? "visible" : "hidden"}
+						transition={{ ease: logoEase, duration: revealDuration, delay: 0.35 }}
+						className="w-full flex flex-col min-h-[26vh] border-t border-[#1B2B6B33] mt-[56px] sm:mt-[44px] xm:mt-[36px] pt-[36px] pb-[48px] sm:mb-[80px] xm:mb-[80px] gap-[40px]">
+						<div className="flex justify-between items-center padding-x gap-[20px] sm:flex-col sm:items-start xm:flex-col xm:items-start">
+							<div className="w-[55%] xm:w-full sm:w-full">
+								<p className="tagline">
+									The Only Marketing Agency Your Coaching Business Will Ever Need
+								</p>
+								<p className="paragraph font-NeueMontreal text-secondry opacity-60 mt-[8px] text-[15px]">
+									We build, launch, and scale the complete growth system behind your coaching business — Meta ads, funnels, automation, and beyond.
+								</p>
+							</div>
+							<div className="w-[45%] xm:w-full sm:w-full flex justify-end xm:flex-col xm:items-start sm:flex-col sm:items-start">
+								<div className="w-fit flex items-center justify-between bg-secondry cursor-pointer rounded-full group">
+									<RoundButton
+										href="/contact"
+										title="Book a Strategy Call"
+										bgcolor="#000"
+										className="bg-white text-black"
+										style={{ color: "#fff" }}
+									/>
+								</div>
+							</div>
+						</div>
+						<div className="w-full flex items-center overflow-hidden justify-center xm:hidden sm:hidden">
+							<motion.p
+								initial={{ y: "-100%", opacity: 0 }}
+								animate={showHeroContent ? { y: "100%", opacity: 0.5 } : { y: "-100%", opacity: 0 }}
+								transition={{
+									duration: 1.8,
+									repeat: showHeroContent ? Infinity : 0,
+									ease: [0.3, 0.86, 0.36, 0.95],
+								}}
+								className="paragraph opacity-50 font-NeueMontreal text-secondry">
+								scroll down
+							</motion.p>
+						</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>

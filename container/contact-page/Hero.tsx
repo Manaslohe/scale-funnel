@@ -1,49 +1,31 @@
-import Image from "next/image";
-import { logoIcon } from "@/public";
+"use client";
 import { motion } from "framer-motion";
+
+const logoEase = [0.33, 1, 0.68, 1];
 
 export default function Hero() {
 	return (
 		<section className="w-full padding-x">
 			<div className="w-full flex flex-col">
-				<div className="w-full pt-[160px] pb-[50px] lg:pt-[140px] md:pt-[120px] sm:pt-[110px] xm:pt-[100px]">
-					<h1 className="text-[96px] leading-[102px] lg:text-[78px] lg:leading-[84px] md:text-[64px] md:leading-[70px] sm:text-[48px] sm:leading-[54px] xm:text-[40px] xm:leading-[46px] tracking-[0.005em] text-[#202021] font-semibold font-FoundersGrotesk uppercase">
-						READY TO SCALE <br />
-						<div className="flex items-center gap-[5px]">
-							<motion.span
-								initial={{ width: 0 }}
-								animate={{ width: "auto" }}
-								transition={{
-									ease: [0.86, 0, 0.07, 0.995],
-									duration: 1,
-									delay: 1.5,
-								}}>
-								<Image
-									width={120}
-									height={50}
-									src={logoIcon}
-									alt="img"
-									className="w-auto h-[95px] lg:w-auto lg:h-auto md:w-[100px] md:h-[63px] sm:w-[74px] sm:h-[45px] xm:w-[64px] xm:h-[40px] object-contain xl:mt-[15px] mt-[10px]"
-								/>
-							</motion.span>
-							<h1 className="text-[96px] leading-[102px] lg:text-[78px] lg:leading-[84px] md:text-[64px] md:leading-[70px] sm:text-[48px] sm:leading-[54px] xm:text-[40px] xm:leading-[46px] tracking-[0.005em] text-[#202021] font-semibold font-FoundersGrotesk uppercase">
-								YOUR
-							</h1>
-						</div>
-						COACHING BUSINESS?
-					</h1>
+				<div className="w-full page-top pb-[60px] lg:pb-[50px] md:pb-[40px] sm:pb-[32px] xm:pb-[28px]">
+					<motion.h1
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ ease: logoEase, duration: 0.7 }}
+						className="heading tracking-[-1.3px] text-secondry font-semibold font-FoundersGrotesk uppercase">
+						LET&apos;S START <br />
+						A PROJECT TOGETHER
+					</motion.h1>
 				</div>
-				<div className="w-full pb-[15px] flex flex-col gap-[15px]">
-					<p className="paragraph font-NeueMontreal text-secondry max-w-[500px]">
-						Whether you're just launching or ready to scale — we
-						have a starting point for you.&nbsp;
-						<span className="font-medium">
-							Guaranteed response within 24 hours.
-						</span>
-					</p>
-					<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
-						Fill the form below:
-					</h3>
+				<div className="w-full pt-[40px] pb-[24px] border-t border-[#1B2B6B22]">
+					<motion.h2
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, margin: "-60px" }}
+						transition={{ ease: logoEase, duration: 0.6 }}
+						className="text-[42px] leading-[1.08] lg:text-[38px] md:text-[34px] sm:text-[30px] xm:text-[26px] font-black font-FoundersGrotesk text-secondry uppercase tracking-[1.75px]">
+						Fill the Form Below
+					</motion.h2>
 				</div>
 			</div>
 		</section>

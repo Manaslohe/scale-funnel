@@ -11,21 +11,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#F7F5F1",
-        secondry: "#202021",
-        marquee: "#282762",
-        about: "#F3ECE4",
-        navy: "#282762",
-        navylight: "#4F57A3",
-        orange: "#DA7B31",
-        orangelight: "#F0A878",
-        cream: "#E9E7DF",
-        dark: "#202021"
+        background: "#F8F9FA",
+        secondry: "#1B2B6B",
+        marquee: "#1B2B6B",
+        about: "#EEF2FF",
+        accent: "#F47B20",
+        dark: "#0A1628",
       },
     },
     fontFamily: {
-      FoundersGrotesk: ["Space Grotesk", "sans-serif"],
-      NeueMontreal: ["Inter", "sans-serif"],
+      FoundersGrotesk: ["FoundersGrotesk", "sans-serif"],
+      NeueMontreal: ["NeueMontreal", "sans-serif"],
     },
     screens: {
       xm: { max: "400px" },

@@ -15,7 +15,6 @@ import { useRef } from "react";
 export default function LogoMarquee({
 	children,
 	baseVelocity = 100,
-	forceForward = false,
 }: TlogoMarqueeProps) {
 	const baseX = useMotionValue(0);
 	const { scrollY } = useScroll();
@@ -33,19 +32,13 @@ export default function LogoMarquee({
 	useAnimationFrame((t, delta) => {
 		let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
-		if (!forceForward) {
-			if (velocityFactor.get() < 0) {
-				directionFactor.current = -1;
-			} else if (velocityFactor.get() > 0) {
-				directionFactor.current = 1;
-			}
+		if (velocityFactor.get() < 0) {
+			directionFactor.current = -1;
+		} else if (velocityFactor.get() > 0) {
+			directionFactor.current = 1;
 		}
 
-		const appliedVelocityFactor = forceForward
-			? Math.abs(velocityFactor.get())
-			: velocityFactor.get();
-
-		moveBy += directionFactor.current * moveBy * appliedVelocityFactor;
+		moveBy += directionFactor.current * moveBy * velocityFactor.get();
 
 		baseX.set(baseX.get() + moveBy);
 	});

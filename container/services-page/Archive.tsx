@@ -1,53 +1,66 @@
 "use client";
-import { useState } from "react";
-import { achiveItems } from "@/constants";
+import { motion } from "framer-motion";
+import { CountUp } from "@/animation";
 
-const stats = achiveItems.flatMap((item) => [
-	{ id: `${item.id}-1`, value: item.title1[0], label: item.subTitle1 },
-	{ id: `${item.id}-2`, value: item.title2[0], label: item.subTitle2 },
-]);
+const stats = [
+	{
+		id: 1,
+		end: 50,
+		suffix: "+",
+		label: "Coaching businesses scaled across health, business, mindset & more",
+	},
+	{
+		id: 2,
+		end: 2,
+		prefix: "$",
+		suffix: "M+",
+		label: "In ad spend managed with data-driven optimization",
+	},
+	{
+		id: 3,
+		end: 3.2,
+		decimals: 1,
+		suffix: "×",
+		label: "Average ROAS across active client campaigns",
+	},
+	{
+		id: 4,
+		end: 90,
+		suffix: "%",
+		label: "Client retention rate — because results compound",
+	},
+];
 
 export default function Archive() {
-	const [activeId, setActiveId] = useState<string | null>(null);
-
 	return (
 		<section className="w-full padding-y">
 			<div className="w-full padding-x">
-				<h3 className="text-[28px] leading-[36px] lg:text-[26px] lg:leading-[34px] md:text-[24px] md:leading-[32px] font-bold font-NeueMontreal text-secondry mb-[30px]">
-					The Scale Funnel in numbers:
+				<h3 className="section-heading mb-[40px] sm:mb-[30px] xm:mb-[24px]">
+					Scale Funnel in Numbers
 				</h3>
 
-				<div className="w-full grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 xm:grid-cols-1 gap-[20px]">
-					{stats.map((stat) => {
-						const isActive = activeId === stat.id;
-						return (
-							<button
-								key={stat.id}
-								type="button"
-								onClick={() =>
-									setActiveId(isActive ? null : stat.id)
-								}
-								onMouseEnter={() => setActiveId(stat.id)}
-								className={`text-left p-[28px] rounded-[20px] border transition-all duration-300 ${
-									isActive
-										? "bg-secondry border-secondry -translate-y-[4px] shadow-[0_12px_40px_rgba(32,32,33,0.12)]"
-										: "bg-[#EFE9E1] border-[#20202122] hover:border-[#20202155] hover:-translate-y-[2px]"
-								}`}>
-								<p
-									className={`text-[64px] leading-[68px] lg:text-[56px] lg:leading-[60px] font-FoundersGrotesk font-bold transition-colors duration-300 ${
-										isActive ? "text-orange" : "text-secondry"
-									}`}>
-									{stat.value}
-								</p>
-								<p
-									className={`paragraph font-NeueMontreal pt-[12px] transition-colors duration-300 ${
-										isActive ? "text-white" : "text-[#20202199]"
-									}`}>
-									{stat.label}
-								</p>
-							</button>
-						);
-					})}
+				<div className="w-full grid grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xm:grid-cols-1 gap-[20px]">
+					{stats.map((stat, index) => (
+						<motion.div
+							key={stat.id}
+							className="rounded-[20px] border border-[#1B2B6B12] bg-white p-[32px] sm:p-[24px] xm:p-[20px] flex flex-col justify-between min-h-[200px] shadow-[0_4px_20px_rgba(27,43,107,0.05)] transition-shadow duration-500 hover:shadow-[0_16px_40px_rgba(27,43,107,0.1)]"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true, margin: "-40px" }}
+							transition={{ duration: 0.5, delay: index * 0.08, ease: [0.33, 1, 0.68, 1] }}>
+							<CountUp
+								end={stat.end}
+								decimals={stat.decimals ?? 0}
+								prefix={stat.prefix ?? ""}
+								suffix={stat.suffix ?? ""}
+								duration={2.2}
+								className="font-FoundersGrotesk font-black text-[56px] sm:text-[44px] xm:text-[40px] text-secondry leading-none tracking-[-1px]"
+							/>
+							<p className="font-NeueMontreal text-[16px] sm:text-[15px] leading-[26px] text-secondry/65 mt-[24px] max-w-[320px]">
+								{stat.label}
+							</p>
+						</motion.div>
+					))}
 				</div>
 			</div>
 		</section>

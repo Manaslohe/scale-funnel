@@ -2,51 +2,34 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import { IoMdClose } from "react-icons/io";
-import { logo, mobileLogo } from "@/public";
-import { footerItems, footernavbarItems } from "@/constants";
+import { logo } from "@/public";
+import { footerItems, navbarItems } from "@/constants";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { AnimatePresence, motion } from "framer-motion";
+import { LinkHover, TextHover } from "@/animation";
 
-const NAV_REVEAL_MS = 500;
-
-const neonLinkClass =
-	"text-orange drop-shadow-[0_0_16px_rgba(218,123,49,0.9)]";
-
-export default function MobileNav({ navReady = true }: { navReady?: boolean }) {
+export default function MobileNav() {
 	const [toggle, setToggle] = useState(false);
-	const [pressedId, setPressedId] = useState<number | null>(null);
-	const router = useRouter();
-
-	const isActive = (href: string) => {
-		if (href === "/") return router.pathname === "/";
-		return router.pathname.startsWith(href);
-	};
+	const navItems = navbarItems.filter((item) => item.title !== "Blog");
+	const socialItems = footerItems.filter((item) => item.title !== "Gmail");
 
 	return (
 		<>
-			<div
-				className="w-full hidden justify-between items-center gap-[10px] pt-[20px] pb-[16px] sm:pt-[22px] sm:pb-[18px] xm:pt-[18px] xm:pb-[16px] padding-x bg-cream fixed top-0 left-0 z-40 sm:flex xm:flex md:flex overflow-hidden"
-				style={{
-					opacity: navReady ? 1 : 0,
-					transition: `opacity ${NAV_REVEAL_MS}ms cubic-bezier(0.16, 1, 0.3, 1)`,
-					pointerEvents: navReady ? "auto" : "none",
-				}}>
-				<Link
-					href={"/"}
-					className="flex-1 min-w-0 max-w-[55%] overflow-hidden">
+			<div className="w-full hidden justify-between items-center h-[88px] sm:h-[84px] xm:h-[80px] padding-x sm:flex xm:flex md:flex fixed top-0 left-0 z-50 backdrop-blur-[12px] bg-[#F8F9FA]/80 border-b border-[#1B2B6B]/10">
+				<Link href={"/"} className="flex items-center pt-[8px] pb-[14px] sm:pb-[16px] xm:pb-[18px]">
 					<Image
 						src={logo}
-						alt="TSF logo"
-						width={130}
-						height={80}
-						className="w-[108px] sm:w-[100px] xm:w-[90px] max-w-full h-auto object-contain object-left"
+						alt="The Scale Funnel logo"
+						width={160}
+						height={48}
+						className="object-contain w-[140px] sm:w-[128px] xm:w-[116px] h-auto"
+						style={{ mixBlendMode: "multiply" }}
 					/>
 				</Link>
 				<HiOutlineMenuAlt4
 					onClick={() => setToggle(true)}
-					className="text-[26px] shrink-0 cursor-pointer text-black"
+					className="text-[28px] cursor-pointer text-secondry"
 				/>
 			</div>
 			<AnimatePresence mode="wait">
@@ -56,63 +39,52 @@ export default function MobileNav({ navReady = true }: { navReady?: boolean }) {
 						animate={{ y: 0 }}
 						exit={{ y: "-100%" }}
 						transition={{ duration: 1, ease: [0.3, 0.86, 0.36, 0.95] }}
-						className="fixed top-0 bottom-0 right-0 z-50 w-full min-h-screen flex flex-col bg-secondry overflow-hidden">
-						<div className="w-full flex justify-between items-center pt-[28px] pb-[24px] sm:pt-[32px] sm:pb-[28px] xm:pt-[24px] xm:pb-[22px] padding-x gap-[12px]">
-							<Link
-								href={"/"}
-								className="shrink-0 overflow-hidden">
+						className="fixed top-0 bottom-0 right-0 z-50 w-full min-h-screen flex flex-col bg-black overflow-y-auto">
+						<div className="w-full flex justify-between items-center padding-x pt-[24px] sm:pt-[20px] xm:pt-[18px] pb-[20px] sm:pb-[18px] xm:pb-[16px] border-b border-[#ffffff22] shrink-0">
+							<Link href={"/"} onClick={() => setToggle(false)} className="flex items-center">
 								<Image
-									src={mobileLogo}
-									alt="TSF logo"
-									width={48}
-									height={62}
-									className="w-[42px] sm:w-[40px] xm:w-[36px] h-auto object-contain"
+									src={logo}
+									alt="The Scale Funnel logo"
+									width={160}
+									height={48}
+									className="object-contain w-[140px] sm:w-[128px] xm:w-[116px] h-auto"
 								/>
 							</Link>
 							<IoMdClose
 								onClick={() => setToggle(false)}
-								className="text-[26px] shrink-0 cursor-pointer text-background"
+								className="text-[28px] cursor-pointer text-white"
 							/>
 						</div>
-						<div className="w-full border-b border-[#F7F5F155] padding-x" />
-						<ul className="flex-1 w-full flex justify-center text-left flex-col gap-[14px] sm:gap-[16px] md:gap-[18px] padding-x pt-[32px] sm:pt-[36px] xm:pt-[28px]">
-							{footernavbarItems.map((item) => {
-								const active = isActive(item.href);
-								const pressed = pressedId === item.id;
-
-								return (
+						<ul className="flex-1 w-full flex flex-col justify-center gap-[28px] sm:gap-[24px] xm:gap-[20px] padding-x py-[48px] sm:py-[40px] xm:py-[36px]">
+							{navItems.map((item) => (
+								<li key={item.id}>
 									<Link
 										href={item.href}
-										key={item.id}
-										onMouseDown={() => setPressedId(item.id)}
-										onMouseUp={() => setPressedId(null)}
-										onMouseLeave={() => setPressedId(null)}
-										onTouchStart={() => setPressedId(item.id)}
-										onTouchEnd={() => setPressedId(null)}
 										onClick={() => setToggle(false)}
-										className={`text-[38px] leading-[44px] sm:text-[50px] sm:leading-[56px] md:text-[66px] md:leading-[74px] font-FoundersGrotesk uppercase font-bold tracking-[-0.02em] break-words transition-all duration-200 ${
-											active || pressed
-												? neonLinkClass
-												: "text-background"
-										}`}>
-										{item.title}
+										className="text-[17px] font-medium font-NeueMontreal text-white capitalize flex flex-col hover mobile-navbar-link navbar-link">
+										<TextHover titile1={item.title} titile2={item.title} />
 									</Link>
-								);
-							})}
+								</li>
+							))}
 						</ul>
-						<div className="w-full border-t border-[#F7F5F155] padding-x pt-[28px] pb-[36px] sm:pb-[40px] xm:pb-[32px]">
-							<p className="small-text font-NeueMontreal text-background/50 uppercase tracking-[0.12em] mb-[16px]">
-								Follow us
-							</p>
-							<div className="flex flex-wrap gap-x-[20px] gap-y-[12px]">
-								{footerItems.map((item) => (
+						<div className="w-full padding-x pb-[48px] sm:pb-[40px] xm:pb-[36px] border-t border-[#ffffff22] pt-[32px] shrink-0">
+							<h2 className="small-text font-semibold font-NeueMontreal text-white/60 uppercase tracking-[2px] pb-[16px]">
+								Social
+							</h2>
+							<div className="flex flex-col gap-y-[10px]">
+								{socialItems.map((item) => (
 									<Link
 										key={item.id}
 										href={item.href}
-										target={item.href.startsWith("http") ? "_blank" : undefined}
-										rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-										className="paragraph font-NeueMontreal text-background/80 hover:text-orange hover:drop-shadow-[0_0_12px_rgba(218,123,49,0.7)] transition-all duration-200">
-										{item.title}
+										target="_blank"
+										rel="noopener noreferrer"
+										onClick={() => setToggle(false)}
+										className="w-fit">
+										<LinkHover
+											title={item.title}
+											href={item.href}
+											className="before:h-[1px] after:h-[1px] !text-white before:!bg-white after:!bg-white text-[17px] font-medium font-NeueMontreal capitalize flex flex-col before:bottom-[1px] after:bottom-[1px] mobile-navbar-link"
+										/>
 									</Link>
 								))}
 							</div>

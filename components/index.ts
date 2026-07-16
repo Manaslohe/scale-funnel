@@ -1,6 +1,4 @@
 export { default as Ready } from "./Ready";
-export { default as ReadyFooterStack } from "./ReadyFooterStack";
-export { default as IntroLoader } from "./IntroLoader";
 export { default as Rounded } from "./Rounded";
 export { default as Marquee } from "./Marquee";
 export { default as Navbar } from "./Navbar";
@@ -9,9 +7,11 @@ export { default as BackgroundImg } from './BackgroundImg';
 export { default as Button } from './Button';
 export { default as RoundButton } from './RoundButton';
 export { default as Eyes } from './Eyes';
+export { default as ScaleFunnelMark } from './ScaleFunnelMark';
 export { default as ProjectCard } from './ProjectCard';
 export { default as Tags } from './Tags';
 export { default as PlayVideo } from './PlayVideo';
 export { default as Curve } from './Curve/Curve';
+export { default as Ratings } from './Ratings';
 export { default as Heading } from './Heading';
 export { default as MobileNav } from './MobileNav';

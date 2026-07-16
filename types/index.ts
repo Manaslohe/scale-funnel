@@ -6,13 +6,11 @@ export type TtextHoverProps = {
 export type TlogoMarqueeProps = {
    children: React.ReactNode;
    baseVelocity: string | number | any;
-   forceForward?: boolean;
 };
 
 export type TMarqueeProps = {
    title: string;
    className: string;
-   forceForward?: boolean;
 };
 
 export type TLinkHoverProps = {

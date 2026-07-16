@@ -1,29 +1,39 @@
-import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { serviceProcessItems } from "@/constants";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Process() {
-	const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
+	const [activeAccordion, setActiveAccordion] = useState(
+		serviceProcessItems[0].id,
+	);
 	const toggleAccordion = (itemId: any) => {
 		setActiveAccordion((prev) => (prev === itemId ? null : itemId));
 	};
 
 	return (
 		<section className="w-full padding-y">
-			<div className="w-full padding-x mb-[40px]">
-				<h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
-					Holistic process
-				</h1>
-			</div>
-			{serviceProcessItems.map((item) => (
-				<div
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, margin: "-60px" }}
+				transition={{ duration: 0.55, ease: [0.33, 1, 0.68, 1] }}
+				className="w-full padding-x mb-[50px] sm:mb-[40px] xm:mb-[32px]">
+				<h2 className="section-heading">
+					Holistic Process
+				</h2>
+			</motion.div>
+			{serviceProcessItems.map((item, index) => (
+				<motion.div
 					key={item.id}
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, margin: "-40px" }}
+					transition={{ duration: 0.5, delay: index * 0.06, ease: [0.33, 1, 0.68, 1] }}
 					className={`w-full flex py-[10px] flex-col ${
 						item.id == 1
-							? "border-y border-[#20202155]"
-							: "border-b border-[#20202155]"
+							? "border-y border-[#21212155]"
+							: "border-b border-[#21212155]"
 					}`}>
 					<div className="w-full flex items-center justify-between py-[10px] padding-x">
 						<div className="w-[50%] sm:w-full xm:w-full">
@@ -75,11 +85,6 @@ export default function Process() {
 													{item.review}
 												</p>
 											</div>
-										<Link
-											href="/contact"
-											className="paragraph font-medium font-NeueMontreal text-orange uppercase w-fit hover">
-											Book a Strategy Call →
-										</Link>
 										</div>
 									</motion.div>
 								)}
@@ -87,7 +92,7 @@ export default function Process() {
 						</div>
 						<div className="w-[10%]" />
 					</div>
-				</div>
+				</motion.div>
 			))}
 		</section>
 	);

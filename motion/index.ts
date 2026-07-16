@@ -1,10 +1,10 @@
 export const navVariants = {
-    hidden: { y: "-100%", transition: { ease: [0.76, 0, 0.24, 1], duration: 0.5 }, },
+    hidden: { y: "-100%" },
     vissible: { y: 0, transition: { ease: [0.76, 0, 0.24, 1], duration: 0.7 }, }
 };
 
 export const navVariants1 = {
-    hidden: { y: "-100%", transition: { ease: [0.76, 0, 0.24, 1], duration: 0.5 }, },
+    hidden: { y: "-100%" },
     vissible: { y: 0, transition: { ease: [0.76, 0, 0.24, 1], duration: 0.7 }, }
 };
 

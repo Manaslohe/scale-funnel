@@ -1,54 +1,97 @@
+"use client";
 import Image from "next/image";
-import { logo } from "@/public";
-import { teamItems } from "@/constants";
+import { useState } from "react";
+import { Team1, Team2, Team3, Team4, logo } from "@/public";
+import { Marquee } from "@/components";
+import { AnimatePresence, motion } from "framer-motion";
 
-const sectionHeading =
-	"text-[28px] leading-[36px] lg:text-[26px] lg:leading-[34px] md:text-[24px] md:leading-[32px] sm:text-[20px] sm:leading-[28px] xm:text-[18px] xm:leading-[26px] font-bold font-NeueMontreal text-white";
+const teamSlides = [
+	{ name: "IHOR", nameLine2: "HULYAHRODSKYY", role: "Founder and CEO", image: Team1 },
+	{ name: "IHOR", nameLine2: "HULYAHRODSKYY", role: "Founder and CEO", image: Team2 },
+	{ name: "IHOR", nameLine2: "HULYAHRODSKYY", role: "Founder and CEO", image: Team3 },
+	{ name: "IHOR", nameLine2: "HULYAHRODSKYY", role: "Founder and CEO", image: Team4 },
+];
+
+const slideVariants = {
+	enter: (dir: number) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),
+	center: { x: 0, opacity: 1 },
+	exit: (dir: number) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 0 }),
+};
 
 export default function Team() {
+	const [activeIndex, setActiveIndex] = useState(0);
+	const [direction, setDirection] = useState(1);
+
+	const handleCycle = () => {
+		setDirection(1);
+		setActiveIndex((prev) => (prev + 1) % teamSlides.length);
+	};
+
+	const active = teamSlides[activeIndex];
+
 	return (
 		<section className="w-full bg-marquee min-h-screen rounded-t-[20px]">
-			<div className="w-full padding-x pt-[70px] lg:pt-[60px] md:pt-[50px] sm:pt-[40px] xm:pt-[40px]">
-				<p className={sectionHeading}>Meet the Founders</p>
-				<p className="w-[80%] sm:w-full xm:w-full text-[20px] leading-[32px] lg:text-[19px] lg:leading-[30px] md:text-[18px] md:leading-[28px] font-normal font-NeueMontreal text-white/90 pt-[24px] lg:pt-[22px] md:pt-[20px] sm:pt-[18px] xm:pt-[16px] max-w-[860px]">
-					Three specialists behind every growth system — strategy, creative, and analytics working together so your coaching business can grow with clarity and momentum.
-				</p>
+			<div className="w-full bg-marquee z-10 relative rounded-t-[20px] padding-y">
+				<Marquee
+					title="Meet Our Team"
+					className="pb-[50px] lg:pb-[40px] md:pb-[30px] sm:pb-[25px] xm:pb-[18px] text-[540px] leading-[330px] lg:text-[380px] lg:leading-[240px] md:text-[300px] md:leading-[160px] sm:text-[230px] sm:leading-[140px] xm:text-[130px] xm:leading-[80px]"
+				/>
 			</div>
-			<div className="w-full bg-marquee flex flex-col items-center gap-[30px] pb-[80px] padding-x pt-[50px] lg:pt-[44px] md:pt-[40px] sm:pt-[36px] xm:pt-[32px]">
-				{teamItems.map((item) => (
-					<div
-						className="w-[80%] p-[30px] bg-background rounded-[20px] sm:w-full  xm:w-full"
-						key={item.id}>
-						<div className="w-full flex flex-col justify-between gap-[20px] py-[10px]">
-							<div className="flex justify-between sm:flex-col xm:flex-col gap-[20px] items-start">
+			<div className="w-full bg-marquee flex items-center justify-center pb-[50px] padding-x">
+				<div
+					onClick={handleCycle}
+					onKeyDown={(e) => e.key === "Enter" && handleCycle()}
+					role="button"
+					tabIndex={0}
+					className="w-[80%] p-[20px] bg-background rounded-[20px] sm:w-full xm:w-full cursor-pointer select-none overflow-hidden">
+					<AnimatePresence mode="wait" custom={direction}>
+						<motion.div
+							key={activeIndex}
+							custom={direction}
+							variants={slideVariants}
+							initial="enter"
+							animate="center"
+							exit="exit"
+							transition={{ duration: 0.45, ease: [0.33, 1, 0.68, 1] }}
+							className="w-full flex flex-col justify-between gap-[20px] py-[10px]">
+							<div className="flex justify-between sm:flex-col xm:flex-col gap-[20px]">
 								<div>
 									<Image
 										src={logo}
-										alt="tsf-logo"
-										width={50}
-										height={50}
+										alt="The Scale Funnel logo"
+										width={68}
+										height={68}
+										className="w-[68px] h-auto"
 									/>
 								</div>
-								<div className="w-[90px] h-[90px] rounded-full bg-navy flex items-center justify-center shrink-0">
-									<span className="text-white font-NeueMontreal font-medium text-[28px]">
-										{item.initials}
-									</span>
+								<div>
+									<Image
+										src={active.image}
+										alt={active.name}
+										width={300}
+										height={300}
+										className="rounded-[10px] sm:w-full xm:w-full"
+									/>
+									<p className="paragraph font-NeueMontreal font-normal text-secondry py-[10px]">
+										{active.role}
+									</p>
 								</div>
 							</div>
-							<div className="flex flex-col gap-[15px]">
-								<h1 className="sub-heading font-bold font-FoundersGrotesk text-secondry">
-									{item.name}
-								</h1>
-								<p className="paragraph font-NeueMontreal font-medium text-orange uppercase">
-									{item.role}
-								</p>
-								<p className="paragraph font-NeueMontreal font-normal text-secondry max-w-[700px]">
-									{item.bio}
-								</p>
+							<div className="flex justify-between items-end sm:flex-col xm:flex-col sm:items-start xm:items-start">
+								<div>
+									<h1 className="heading font-bold font-FoundersGrotesk text-secondry">
+										{active.name} <br /> {active.nameLine2}
+									</h1>
+								</div>
+								<div>
+									<h1 className="heading font-bold font-FoundersGrotesk text-secondry">
+										{activeIndex + 1} / {teamSlides.length}
+									</h1>
+								</div>
 							</div>
-						</div>
-					</div>
-				))}
+						</motion.div>
+					</AnimatePresence>
+				</div>
 			</div>
 		</section>
 	);
