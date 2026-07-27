@@ -1,7 +1,8 @@
 export { default as eyes } from './eyes.svg';
-export { default as logo } from './scale-funnel-logo.png';
-export { default as mobileLogo } from './scale-funnel-icon.png';
-export { default as awwwards } from './awwwards.svg';
+export { default as logo } from './desktoplogo-colour.png';
+export { default as mobileLogo } from './mobilelogo-colour.png';
+export {default as mobilelogowhite} from './mobilelogo-white.png';
+export {default as logowhite} from './desktoplogo-white.png';
 export { default as aboutImg } from './aboutImg.webp';
 export { default as videoImg } from './videoImg.jpeg';
 export { default as project1 } from './project1.webp';
@@ -22,13 +23,9 @@ export { default as client06 } from './client06.png';
 export { default as client07 } from './client07.jpeg';
 export { default as client08 } from './client08.png';
 export { default as client09 } from './client09.png';
-export { default as brand01 } from './brand01.svg';
-export { default as brand02 } from './brand02.svg';
-export { default as brand03 } from './brand03.png';
 export { default as publication1 } from './publication1.jpeg';
 export { default as publication2 } from './publication2.png';
 export { default as publication3 } from './publication3.png';
-export { default as ochiside } from './ochi-side.jpg';
 export { default as eyeplay } from './eyeplay.svg';
 export { default as contactHero } from './contacthhero.jpg';
 
@@ -43,7 +40,6 @@ export { default as capaybilities2 } from './capybilities2.jpeg';
 export { default as capaybilities3 } from './capybilities3.jpeg';
 export { default as capaybilities4 } from './capybilities4.jpeg';
 export { default as capaybilities5 } from './capybilities5.jpeg';
-export { default as background } from './background.png';
 
 // insights page assets
 
@@ -72,7 +68,6 @@ export { default as showcase3 } from './showcase3.jpeg';
 export { default as showcase4 } from './showcase4.jpeg';
 export { default as showcase5 } from './showcase5.jpeg';
 export { default as showcase6 } from './showcase6.jpeg';
-export { default as after } from './after.png';
 export { default as workizhero } from './workizhero.jpg';
 
 // about page
@@ -81,6 +76,4 @@ export { default as officevibe } from './officevibe.svg';
 export { default as nestle } from './nestle.svg';
 export { default as toyota } from './toyota.svg';
 export { default as lexus } from './lexus.svg';
-export { default as aflorihtmic } from './aflomatric.svg';
 export { default as orderlion } from './orderlion.svg';
-export { default as blackBox } from './blackBox.svg';

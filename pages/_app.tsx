@@ -1,21 +1,11 @@
 import "@/styles/globals.css";
-import { AnimatePresence } from "framer-motion";
+import PageTransition from "@/components/PageTransition/PageTransition";
 
-export default function App({
-	Component,
-	pageProps,
-	router,
-}: {
-	Component: any;
-	pageProps: any;
-	router: any;
-}) {
-	return (
-		<AnimatePresence mode="wait">
-			<Component
-				key={router.route}
-				{...pageProps}
-			/>
-		</AnimatePresence>
-	);
+export default function App({ Component, pageProps, router }: { Component: any; pageProps: any; router: any }) {
+  return (
+    <>
+      <PageTransition />
+      <Component key={router.route} {...pageProps} />
+    </>
+  );
 }
