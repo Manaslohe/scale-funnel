@@ -72,7 +72,6 @@ export default function Hero() {
 	as={Link}
 	href="/contact"
 	containerClassName="rounded-[50px]"
-	bgClassName="bg-transparent"
 	className="flex items-center gap-[6px] text-white paragraph font-NeueMontreal uppercase h-[54px] px-[28px] text-[14px] tracking-[1px] leading-none"
 >
 	<span>Book a Strategy Call</span>
