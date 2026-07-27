@@ -3,7 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import {logowhite, logo, mobileLogo, mobilelogowhite } from "@/public";
+import { logowhite, logo, mobileLogo, mobilelogowhite } from "@/public";
+import { HoverBorderGradient } from "../../components/ui/hover-border-gradient";
 
 export default function Hero() {
 	return (
@@ -39,13 +40,11 @@ export default function Hero() {
 						<h1 className="heading tracking-[-1.3px] text-white font-semibold font-FoundersGrotesk uppercase flex flex-col gap-0 leading-[0.85] lg:leading-[0.85] md:leading-[0.85] sm:leading-[0.85] xm:leading-[0.85] drop-shadow-[0_2px_20px_rgba(0,0,0,0.25)]">
 							<div>YOUR GROWTH</div>
 							<div className="flex items-center gap-[15px] sm:gap-[8px] xm:gap-[5px]">
-								<span
-									className="hero-logo pt-[13px] flex items-center overflow-hidden h-[107px] lg:h-[80px] md:h-[63px] sm:h-[45px] xm:h-[40px] shrink-0">
+								<span className="hero-logo pt-[13px] flex items-center overflow-hidden h-[107px] lg:h-[80px] md:h-[63px] sm:h-[45px] xm:h-[40px] shrink-0">
 									<Image
 										width={120}
 										height={95}
 										src={logowhite}
-									
 										alt="The Scale Funnel Icon"
 										className="w-auto h-[95px] lg:h-[80px] md:h-[63px] sm:h-[45px] xm:h-[40px] object-contain"
 									/>
@@ -69,23 +68,16 @@ export default function Hero() {
 								</p>
 							</div>
 							<div className="w-[45%] xm:w-full sm:w-full flex justify-end xm:flex-col xm:items-start sm:flex-col sm:items-start gap-[20px]">
-								<div className="flex items-center gap-[5px] group">
-									<div className="rounded-[50px] border border-white/60 group-hover:bg-white py-[3px] px-[12px] cursor-pointer transition-colors duration-300">
-										<Link
-											className="paragraph font-NeueMontreal text-white uppercase group-hover:text-[#1B2B6B] transition-all transform duration-[0.3s] ease-[.215,.61,.355,1]"
-											href="/contact">
-											Book a Strategy Call
-										</Link>
-									</div>
-									<div className="w-[33px] flex items-center justify-center h-[33px] border border-white/60 rounded-full p-[1px] group-hover:bg-white transition-all transform duration-[0.3s] ease-[.215,.61,.355,1] cursor-pointer xm:hidden sm:hidden">
-										<p className="font-normal text-white group-hover:text-[#1B2B6B]">
-											<ArrowUpRight
-												size={24}
-												strokeWidth={1.25}
-											/>
-										</p>
-									</div>
-								</div>
+								<HoverBorderGradient
+	as={Link}
+	href="/contact"
+	containerClassName="rounded-[50px]"
+	bgClassName="bg-transparent"
+	className="flex items-center gap-[6px] text-white paragraph font-NeueMontreal uppercase h-[54px] px-[28px] text-[14px] tracking-[1px] leading-none"
+>
+	<span>Book a Strategy Call</span>
+	<ArrowUpRight size={18} strokeWidth={1.5} />
+</HoverBorderGradient>
 							</div>
 						</div>
 						<div className="w-full flex items-center overflow-hidden justify-center xm:hidden sm:hidden">
