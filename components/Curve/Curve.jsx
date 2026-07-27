@@ -74,7 +74,7 @@ export default function Curve({ children, backgroundColor }) {
 					style={{
 						width: "100vw",
 						height: "100vh",
-						backgroundColor: "#181818",
+						backgroundColor: "#212121",
 						position: "fixed",
 						inset: 0,
 						zIndex: 9999,

@@ -80,7 +80,7 @@ export default function PageTransition() {
       }, HOLD_AFTER_LOAD * 1000);
     };
 
-    const handleRouteChangeError = () => {}; // swallow, we emit it ourselves
+    const handleRouteChangeError = () => { }; // swallow, we emit it ourselves
 
     router.events.on("routeChangeStart", handleRouteChangeStart);
     router.events.on("routeChangeComplete", handleRouteChangeComplete);
@@ -113,7 +113,7 @@ export default function PageTransition() {
           animate="enter"
           exit="exit"
           onAnimationComplete={handlePanelAnimationComplete}
-          className="fixed inset-0 z-[99999] overflow-hidden bg-[#181818] will-change-transform"
+          className="fixed inset-0 z-[99999] overflow-hidden bg-[#212121] will-change-transform"
         >
           <div className="flex h-full w-full items-center overflow-hidden px-[50px]">
             <div className="overflow-hidden">
